@@ -9,6 +9,10 @@ public class ClientNetworkModel {
     private Socket socket;
     private ObjectInputStream in;
 
+    public Socket getSocket() {
+        return socket;
+    }
+
     public Socket connect(String serverAddress, int port) {
         this.serverAddress = serverAddress;
         this.port = port;
