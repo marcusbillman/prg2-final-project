@@ -14,6 +14,14 @@ public class ServerNetworkModel {
         this.port = port;
     }
 
+    public ServerSocket getServerSocket() {
+        return serverSocket;
+    }
+
+    public Socket getSocket() {
+        return socket;
+    }
+
     public Socket listen() {
         try {
             serverSocket = new ServerSocket(port);
