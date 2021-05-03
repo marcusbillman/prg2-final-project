@@ -22,12 +22,10 @@ public class ServerNetworkModel {
         return socket;
     }
 
-    public Socket listen() throws IOException {
+    public void listen() throws IOException {
         serverSocket = new ServerSocket(port);
         socket = serverSocket.accept();
         out = new ObjectOutputStream(socket.getOutputStream());
-
-        return socket;
     }
 
     public void sendParcel(String feature, Object payload) throws IOException {
