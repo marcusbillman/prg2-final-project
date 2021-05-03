@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class ServerController {
     private final ServerView serverView;
     private final ServerNetworkModel serverNetworkModel;
@@ -6,6 +8,13 @@ public class ServerController {
         this.serverView = serverView;
         this.serverNetworkModel = serverNetworkModel;
 
-        this.serverNetworkModel.listen();
+        try {
+            this.serverNetworkModel.listen();
+            this.serverView.setProgressBarVisible(false);
+            this.serverView.setStatusLabelText("Connected to " +
+                    this.serverNetworkModel.getSocket().getRemoteSocketAddress());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
