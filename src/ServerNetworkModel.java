@@ -22,24 +22,16 @@ public class ServerNetworkModel {
         return socket;
     }
 
-    public Socket listen() {
-        try {
-            serverSocket = new ServerSocket(port);
-            socket = serverSocket.accept();
-            out = new ObjectOutputStream(socket.getOutputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Socket listen() throws IOException {
+        serverSocket = new ServerSocket(port);
+        socket = serverSocket.accept();
+        out = new ObjectOutputStream(socket.getOutputStream());
 
         return socket;
     }
 
-    public void sendParcel(String feature, Object payload) {
+    public void sendParcel(String feature, Object payload) throws IOException {
         Parcel parcel = new Parcel("request", feature, payload);
-        try {
-            out.writeObject(parcel);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        out.writeObject(parcel);
     }
 }
