@@ -1,21 +1,22 @@
 import javax.swing.*;
+import java.io.IOException;
 
 public class ClientController {
-    private ClientNetworkModel clientNetworkModel;
+    private NetworkModel networkModel;
 
-    public ClientController(ClientNetworkModel clientNetworkModel) {
-        this.clientNetworkModel = clientNetworkModel;
+    public ClientController(NetworkModel networkModel) {
+        this.networkModel = networkModel;
 
         String serverAddress = JOptionPane.showInputDialog("Server address", "localhost");
-        this.clientNetworkModel.connect(serverAddress, 1337);
+        this.networkModel.connect(serverAddress, 1337);
         System.out.println("Connected to server");
 
         startReceiving();
     }
 
     private void startReceiving() {
-        while (clientNetworkModel.getSocket().isConnected()) {
-            Parcel parcel = this.clientNetworkModel.receiveParcel();
+        while (networkModel.getSocket().isConnected()) {
+            Parcel parcel = this.networkModel.receiveParcel();
 
             String type = parcel.getType();
             String feature = parcel.getFeature();

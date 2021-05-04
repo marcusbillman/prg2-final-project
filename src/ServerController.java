@@ -4,20 +4,20 @@ import java.io.IOException;
 
 public class ServerController {
     private final ServerView serverView;
-    private final ServerNetworkModel serverNetworkModel;
+    private final NetworkModel networkModel;
 
-    public ServerController(ServerView serverView, ServerNetworkModel serverNetworkModel) {
+    public ServerController(ServerView serverView, NetworkModel networkModel) {
         this.serverView = serverView;
-        this.serverNetworkModel = serverNetworkModel;
+        this.networkModel = networkModel;
 
         // Attach listeners (end of this file) to view
         this.serverView.addPopupSendButtonListener(new PopupSendButtonListener());
 
         try {
-            this.serverNetworkModel.listen();
+            this.networkModel.listen(1337);
             this.serverView.setProgressBarVisible(false);
             this.serverView.setStatusLabelText("Connected to " +
-                    this.serverNetworkModel.getSocket().getRemoteSocketAddress());
+                    this.networkModel.getSocket().getRemoteSocketAddress());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -30,7 +30,7 @@ public class ServerController {
             String body = serverView.getPopupBody();
             String title = serverView.getPopupTitle();
             try {
-                serverNetworkModel.sendParcel("popup", new String[]{body, title});
+                networkModel.sendParcel("popup", new String[]{body, title});
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
