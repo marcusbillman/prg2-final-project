@@ -38,5 +38,10 @@ public class ClientController {
         String[] payloadArray = (String[]) payload;
         JOptionPane.showMessageDialog(
                 null, payloadArray[0], payloadArray[1], JOptionPane.INFORMATION_MESSAGE);
+        try {
+            networkModel.sendParcel("popup", "Popup closed at " + java.time.LocalDateTime.now());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
