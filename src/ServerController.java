@@ -21,6 +21,28 @@ public class ServerController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        startReceiving();
+    }
+
+    private void startReceiving() {
+        while (networkModel.getSocket().isConnected()) {
+            Parcel parcel = this.networkModel.receiveParcel();
+
+            String type = parcel.getType();
+            String feature = parcel.getFeature();
+            Object payload = parcel.getPayload();
+
+            System.out.println(type + " | " + feature + " | " + payload);
+
+            switch (feature) {
+                case "popup":
+                    serverView.setStatusLabelText((String) payload);
+                    break;
+                default:
+                    throw new IllegalArgumentException("'" + feature + "' is not a valid feature name");
+            }
+        }
     }
 
     // -------------------- Listeners
