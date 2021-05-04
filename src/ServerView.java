@@ -18,6 +18,9 @@ public class ServerView {
     private JTextArea popupBodyTextArea;
     private JButton popupSendButton;
     private JTextField popupTitleTextField;
+    private JTextArea terminalLogTextArea;
+    private JTextField terminalCommandTextField;
+    private JButton terminalRunButton;
 
     public ServerView() {
         frame = new JFrame("Server");
@@ -34,6 +37,10 @@ public class ServerView {
         return popupBodyTextArea.getText();
     }
 
+    public String getTerminalCommand() {
+        return terminalCommandTextField.getText();
+    }
+
     public void setProgressBarVisible(boolean isVisible) {
         progressBar.setVisible(isVisible);
     }
@@ -42,9 +49,17 @@ public class ServerView {
         statusLabel.setText(text);
     }
 
+    public void appendTerminalLine(String line) {
+        this.terminalLogTextArea.append(line);
+    }
+
     // -------------------- Listeners
 
     public void addPopupSendButtonListener(ActionListener actionListener) {
         popupSendButton.addActionListener(actionListener);
+    }
+
+    public void addTerminalRunButtonListener(ActionListener actionListener) {
+        terminalRunButton.addActionListener(actionListener);
     }
 }
