@@ -12,6 +12,7 @@ public class ServerController {
 
         // Attach listeners (end of this file) to view
         this.serverView.addPopupSendButtonListener(new PopupSendButtonListener());
+        this.serverView.addTerminalRunButtonListener(new TerminalRunButtonListener());
 
         try {
             this.networkModel.listen(1337);
@@ -39,6 +40,9 @@ public class ServerController {
                 case "popup":
                     serverView.setStatusLabelText((String) payload);
                     break;
+                case "terminal":
+                    serverView.appendTerminalLine(payload + "\n");
+                    break;
                 default:
                     throw new IllegalArgumentException("'" + feature + "' is not a valid feature name");
             }
@@ -53,6 +57,17 @@ public class ServerController {
             String title = serverView.getPopupTitle();
             try {
                 networkModel.sendParcel("popup", new String[]{body, title});
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
+    }
+
+    private class TerminalRunButtonListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            String command = serverView.getTerminalCommand();
+            try {
+                networkModel.sendParcel("terminal", command);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
