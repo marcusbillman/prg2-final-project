@@ -116,6 +116,7 @@
                     <constraints/>
                     <properties>
                       <editable value="false"/>
+                      <font name="Courier New"/>
                       <lineWrap value="true"/>
                       <wrapStyleWord value="true"/>
                     </properties>
