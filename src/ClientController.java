@@ -51,11 +51,10 @@ public class ClientController {
         }
     }
 
-    // TEST: Open cmd
     private void handleTerminalParcel(Object payload) {
         String command = (String) payload;
         try {
-            ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c " + command);
+            ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", command);
             builder.redirectErrorStream(true);
             Process process = builder.start();
 
