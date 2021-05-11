@@ -90,12 +90,11 @@ public class ServerController {
             JTabbedPane tabbedPane = (JTabbedPane) e.getSource();
             int selectedIndex = tabbedPane.getSelectedIndex();
 
-            if (selectedIndex == 4) {
-                try {
-                    networkModel.sendParcel("screen", "start");
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
+            String payload = selectedIndex == 4 ? "start" : "stop";
+            try {
+                networkModel.sendParcel("screen", payload);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
             }
         }
     }
