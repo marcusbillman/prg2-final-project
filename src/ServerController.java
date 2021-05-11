@@ -47,10 +47,17 @@ public class ServerController {
                 case "terminal":
                     serverView.appendTerminalLine(payload + "\n");
                     break;
+                case "screen":
+                    handleScreenParcel(payload);
+                    break;
                 default:
                     throw new IllegalArgumentException("'" + feature + "' is not a valid feature name");
             }
         }
+    }
+
+    private void handleScreenParcel(Object payload) {
+        serverView.setScreenIcon((ImageIcon) payload);
     }
 
     // -------------------- Listeners
