@@ -1,6 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,6 +6,8 @@ import java.io.InputStreamReader;
 
 public class ClientController {
     private NetworkModel networkModel;
+    private ClientScreenCapture clientScreenCapture;
+    private Thread screenCaptureThread;
 
     public ClientController(NetworkModel networkModel) {
         this.networkModel = networkModel;
@@ -76,22 +76,12 @@ public class ClientController {
     }
 
     private void handleScreenParcel(Object payload) {
-        BufferedImage bufferedImage;
-        try {
-            Robot robot = new Robot();
-            Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
-            bufferedImage = robot.createScreenCapture(screenRect);
-        } catch (AWTException e) {
-            e.printStackTrace();
-            return;
-        }
-
-        ImageIcon imageIcon = new ImageIcon(bufferedImage);
-
-        try {
-            networkModel.sendParcel("screen", imageIcon);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (payload.equals("start")) {
+            clientScreenCapture = new ClientScreenCapture(networkModel);
+            screenCaptureThread = new Thread(clientScreenCapture);
+            screenCaptureThread.start();
+        } else if (payload.equals("stop")) {
+            screenCaptureThread.stop();
         }
     }
 }
