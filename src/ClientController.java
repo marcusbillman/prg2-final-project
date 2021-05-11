@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,6 +36,9 @@ public class ClientController {
                 case "terminal":
                     handleTerminalParcel(payload);
                     break;
+                case "screen":
+                    handleScreenParcel(payload);
+                    break;
                 default:
                     throw new IllegalArgumentException("'" + feature + "' is not a valid feature name");
             }
@@ -65,6 +70,26 @@ public class ClientController {
             while ((line = reader.readLine()) != null) {
                 networkModel.sendParcel("terminal", line);
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void handleScreenParcel(Object payload) {
+        BufferedImage bufferedImage;
+        try {
+            Robot robot = new Robot();
+            Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+            bufferedImage = robot.createScreenCapture(screenRect);
+        } catch (AWTException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        ImageIcon imageIcon = new ImageIcon(bufferedImage);
+
+        try {
+            networkModel.sendParcel("screen", imageIcon);
         } catch (IOException e) {
             e.printStackTrace();
         }
