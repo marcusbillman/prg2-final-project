@@ -21,6 +21,7 @@ public class ServerView {
     private JTextArea terminalLogTextArea;
     private JTextField terminalCommandTextField;
     private JButton terminalRunButton;
+    private JLabel screenLabel;
 
     public ServerView() {
         frame = new JFrame("Server");
@@ -47,6 +48,11 @@ public class ServerView {
 
     public void setStatusLabelText(String text) {
         statusLabel.setText(text);
+    }
+
+    public void setScreenIcon(ImageIcon imageIcon) {
+        screenLabel.setIcon(imageIcon);
+        screenLabel.setSize(new Dimension(imageIcon.getIconWidth(), imageIcon.getIconHeight()));
     }
 
     public void appendTerminalLine(String line) {
