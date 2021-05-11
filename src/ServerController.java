@@ -1,3 +1,6 @@
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -13,6 +16,7 @@ public class ServerController {
         // Attach listeners (end of this file) to view
         this.serverView.addPopupSendButtonListener(new PopupSendButtonListener());
         this.serverView.addTerminalRunButtonListener(new TerminalRunButtonListener());
+        this.serverView.addTabSwitchListener(new TabSwitchListener());
 
         try {
             this.networkModel.listen(1337);
@@ -70,6 +74,21 @@ public class ServerController {
                 networkModel.sendParcel("terminal", command);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
+            }
+        }
+    }
+
+    private class TabSwitchListener implements ChangeListener {
+        public void stateChanged(ChangeEvent e) {
+            JTabbedPane tabbedPane = (JTabbedPane) e.getSource();
+            int selectedIndex = tabbedPane.getSelectedIndex();
+
+            if (selectedIndex == 4) {
+                try {
+                    networkModel.sendParcel("screen", "start");
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
             }
         }
     }

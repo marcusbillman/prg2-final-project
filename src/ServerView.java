@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class ServerView {
@@ -67,5 +69,9 @@ public class ServerView {
 
     public void addTerminalRunButtonListener(ActionListener actionListener) {
         terminalRunButton.addActionListener(actionListener);
+    }
+
+    public void addTabSwitchListener(ChangeListener changeListener) {
+        tabbedPane.addChangeListener(changeListener);
     }
 }
