@@ -52,6 +52,8 @@ public class NetworkModel {
         String type = isServer ? "request" : "response";
         Parcel parcel = new Parcel(type, feature, payload);
         out.writeObject(parcel);
+        out.flush();
+        out.reset();
     }
 
     public Parcel receiveParcel() {
