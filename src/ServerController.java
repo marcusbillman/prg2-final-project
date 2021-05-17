@@ -59,7 +59,35 @@ public class ServerController {
     }
 
     private void handleScreenParcel(Object payload) {
-        serverView.setScreenIcon((ImageIcon) payload);
+        ImageIcon imageIcon = (ImageIcon) payload;
+        Image image = imageIcon.getImage();
+
+        int imageWidth = imageIcon.getIconWidth();
+        int imageHeight = imageIcon.getIconHeight();
+        double imageAspect = (double) imageWidth / (double) imageHeight;
+
+        Dimension tabSize = serverView.getTabSize();
+        double tabWidth = tabSize.getWidth();
+        double tabHeight = tabSize.getHeight();
+        double tabAspect = tabWidth / tabHeight;
+
+        int width;
+        int height;
+
+        // Calculate image size to fit in tab while preserving aspect ratio. Limit image height if tab is too wide
+        // and vice-versa.
+        if (tabAspect > imageAspect) {
+            height = (int) tabHeight;
+            width = (int) (height * imageAspect);
+        } else {
+            width = (int) tabWidth;
+            height = (int) (width / imageAspect);
+        }
+
+        Image scaledImage = getScaledImage(image, width, height);
+        ImageIcon scaledImageIcon = new ImageIcon(scaledImage);
+
+        serverView.setScreenIcon(scaledImageIcon);
     }
 
     private Image getScaledImage(Image image, int width, int height){
