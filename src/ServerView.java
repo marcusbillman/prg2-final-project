@@ -44,6 +44,10 @@ public class ServerView {
         return terminalCommandTextField.getText();
     }
 
+    public Dimension getTabSize() {
+        return screenTab.getSize();
+    }
+
     public void setProgressBarVisible(boolean isVisible) {
         progressBar.setVisible(isVisible);
     }
