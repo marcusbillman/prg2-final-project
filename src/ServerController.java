@@ -1,8 +1,10 @@
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class ServerController {
@@ -58,6 +60,17 @@ public class ServerController {
 
     private void handleScreenParcel(Object payload) {
         serverView.setScreenIcon((ImageIcon) payload);
+    }
+
+    private Image getScaledImage(Image image, int width, int height){
+        BufferedImage scaledImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D graphics = scaledImage.createGraphics();
+
+        graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        graphics.drawImage(image, 0, 0, width, height, null);
+        graphics.dispose();
+
+        return scaledImage;
     }
 
     // -------------------- Listeners
