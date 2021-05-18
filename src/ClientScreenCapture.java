@@ -2,25 +2,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicBoolean;
 
-public class ClientScreenCapture implements Runnable {
+public class ClientScreenCapture extends Thread {
     private NetworkModel networkModel;
-    private AtomicBoolean running = new AtomicBoolean(false);
     private double fps = 1;
 
     public ClientScreenCapture(NetworkModel networkModel) {
         this.networkModel = networkModel;
     }
 
+    @Override
     public void run() {
-        running.set(true);
-
         double frameUpdateInterval = 1000000000 / fps;
         double delta = 0;
         long lastTime = 0;
 
-        while (running.get()) {
+        while (!interrupted()) {
             long now = System.nanoTime();
             delta += (now - lastTime) / frameUpdateInterval;
             lastTime = now;
@@ -33,10 +30,6 @@ public class ClientScreenCapture implements Runnable {
                 delta--;
             }
         }
-    }
-
-    public void stop() {
-        running.set(false);
     }
 
     private BufferedImage captureScreen() {

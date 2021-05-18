@@ -77,11 +77,10 @@ public class ClientController {
 
     private void handleScreenParcel(Object payload) {
         if (payload.equals("start")) {
-            clientScreenCapture = new ClientScreenCapture(networkModel);
-            screenCaptureThread = new Thread(clientScreenCapture);
+            screenCaptureThread = new ClientScreenCapture(networkModel);
             screenCaptureThread.start();
         } else if (payload.equals("stop")) {
-            screenCaptureThread.stop();
+            screenCaptureThread.interrupt();
         }
     }
 }
