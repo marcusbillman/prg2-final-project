@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class ClientScreenCapture extends Thread {
     private NetworkModel networkModel;
-    private double fps = 1;
+    private double fps = 15;
 
     public ClientScreenCapture(NetworkModel networkModel) {
         this.networkModel = networkModel;
@@ -15,7 +15,7 @@ public class ClientScreenCapture extends Thread {
     public void run() {
         double frameUpdateInterval = 1000000000 / fps;
         double delta = 0;
-        long lastTime = 0;
+        long lastTime = System.nanoTime();
 
         while (!interrupted()) {
             long now = System.nanoTime();
