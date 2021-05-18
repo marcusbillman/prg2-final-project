@@ -1,6 +1,6 @@
-public class ClientMain {
+public class RemoteMain {
     public static void main(String[] args) {
         NetworkModel networkModel = new NetworkModel(false);
-        ClientController clientController = new ClientController(networkModel);
+        RemoteController controller = new RemoteController(networkModel);
     }
 }

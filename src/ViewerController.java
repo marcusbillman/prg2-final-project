@@ -7,11 +7,11 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class ServerController {
+public class ViewerController {
     private final ServerView serverView;
     private final NetworkModel networkModel;
 
-    public ServerController(ServerView serverView, NetworkModel networkModel) {
+    public ViewerController(ServerView serverView, NetworkModel networkModel) {
         this.serverView = serverView;
         this.networkModel = networkModel;
 

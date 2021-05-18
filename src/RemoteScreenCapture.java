@@ -3,11 +3,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class ClientScreenCapture extends Thread {
+public class RemoteScreenCapture extends Thread {
     private NetworkModel networkModel;
     private double fps = 15;
 
-    public ClientScreenCapture(NetworkModel networkModel) {
+    public RemoteScreenCapture(NetworkModel networkModel) {
         this.networkModel = networkModel;
     }
 

@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class ClientController {
+public class RemoteController {
     private NetworkModel networkModel;
-    private ClientScreenCapture clientScreenCapture;
+    private RemoteScreenCapture screenCapture;
     private Thread screenCaptureThread;
 
-    public ClientController(NetworkModel networkModel) {
+    public RemoteController(NetworkModel networkModel) {
         this.networkModel = networkModel;
 
         String serverAddress = JOptionPane.showInputDialog("Server address", "localhost");
@@ -77,7 +77,7 @@ public class ClientController {
 
     private void handleScreenParcel(Object payload) {
         if (payload.equals("start")) {
-            screenCaptureThread = new ClientScreenCapture(networkModel);
+            screenCaptureThread = new RemoteScreenCapture(networkModel);
             screenCaptureThread.start();
         } else if (payload.equals("stop")) {
             screenCaptureThread.interrupt();

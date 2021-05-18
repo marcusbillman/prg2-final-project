@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Client" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="ClientMain" />
+  <configuration default="false" name="Viewer" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="ViewerMain" />
     <module name="prg2-final-project" />
     <method v="2">
       <option name="Make" enabled="true" />

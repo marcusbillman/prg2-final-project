@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Remote and Viewer" type="CompoundRunConfigurationType">
+    <toRun name="Remote" type="Application" />
+    <toRun name="Viewer" type="Application" />
+    <method v="2" />
+  </configuration>
+</component>
