@@ -1,7 +1,7 @@
 public class ViewerMain {
     public static void main(String[] args) {
-        ServerView serverView = new ServerView();
+        ViewerUI ui = new ViewerUI();
         NetworkModel networkModel = new NetworkModel(true);
-        ViewerController controller = new ViewerController(serverView, networkModel);
+        ViewerController controller = new ViewerController(ui, networkModel);
     }
 }

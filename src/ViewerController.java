@@ -8,22 +8,22 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class ViewerController {
-    private final ServerView serverView;
+    private final ViewerUI ui;
     private final NetworkModel networkModel;
 
-    public ViewerController(ServerView serverView, NetworkModel networkModel) {
-        this.serverView = serverView;
+    public ViewerController(ViewerUI ui, NetworkModel networkModel) {
+        this.ui = ui;
         this.networkModel = networkModel;
 
         // Attach listeners (end of this file) to view
-        this.serverView.addPopupSendButtonListener(new PopupSendButtonListener());
-        this.serverView.addTerminalRunButtonListener(new TerminalRunButtonListener());
-        this.serverView.addTabSwitchListener(new TabSwitchListener());
+        this.ui.addPopupSendButtonListener(new PopupSendButtonListener());
+        this.ui.addTerminalRunButtonListener(new TerminalRunButtonListener());
+        this.ui.addTabSwitchListener(new TabSwitchListener());
 
         try {
             this.networkModel.listen(1337);
-            this.serverView.setProgressBarVisible(false);
-            this.serverView.setStatusLabelText("Connected to " +
+            this.ui.setProgressBarVisible(false);
+            this.ui.setStatusLabelText("Connected to " +
                     this.networkModel.getSocket().getRemoteSocketAddress());
         } catch (IOException e) {
             e.printStackTrace();
@@ -44,10 +44,10 @@ public class ViewerController {
 
             switch (feature) {
                 case "popup":
-                    serverView.setStatusLabelText((String) payload);
+                    ui.setStatusLabelText((String) payload);
                     break;
                 case "terminal":
-                    serverView.appendTerminalLine(payload + "\n");
+                    ui.appendTerminalLine(payload + "\n");
                     break;
                 case "screen":
                     handleScreenParcel(payload);
@@ -66,7 +66,7 @@ public class ViewerController {
         int imageHeight = imageIcon.getIconHeight();
         double imageAspect = (double) imageWidth / (double) imageHeight;
 
-        Dimension tabSize = serverView.getTabSize();
+        Dimension tabSize = ui.getTabSize();
         double tabWidth = tabSize.getWidth();
         double tabHeight = tabSize.getHeight();
         double tabAspect = tabWidth / tabHeight;
@@ -87,7 +87,7 @@ public class ViewerController {
         Image scaledImage = getScaledImage(image, width, height);
         ImageIcon scaledImageIcon = new ImageIcon(scaledImage);
 
-        serverView.setScreenIcon(scaledImageIcon);
+        ui.setScreenIcon(scaledImageIcon);
     }
 
     private Image getScaledImage(Image image, int width, int height){
@@ -105,8 +105,8 @@ public class ViewerController {
 
     private class PopupSendButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            String body = serverView.getPopupBody();
-            String title = serverView.getPopupTitle();
+            String body = ui.getPopupBody();
+            String title = ui.getPopupTitle();
             try {
                 networkModel.sendParcel("popup", new String[]{body, title});
             } catch (IOException ioException) {
@@ -117,7 +117,7 @@ public class ViewerController {
 
     private class TerminalRunButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            String command = serverView.getTerminalCommand();
+            String command = ui.getTerminalCommand();
             try {
                 networkModel.sendParcel("terminal", command);
             } catch (IOException ioException) {

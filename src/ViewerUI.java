@@ -3,7 +3,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class ServerView {
+public class ViewerUI {
     private final JFrame frame;
     private JPanel mainPanel;
 
@@ -25,7 +25,7 @@ public class ServerView {
     private JButton terminalRunButton;
     private JLabel screenLabel;
 
-    public ServerView() {
+    public ViewerUI() {
         frame = new JFrame("Server");
         frame.setContentPane(mainPanel);
         frame.pack();
