@@ -67,4 +67,12 @@ public class NetworkModel {
 
         return parcel;
     }
+
+    public void closeConnection() {
+        try {
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
