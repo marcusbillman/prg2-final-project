@@ -22,8 +22,11 @@ public class ViewerController {
 
         String serverAddress = JOptionPane.showInputDialog("Remote address", "localhost");
         this.networkModel.connect(serverAddress, 1337);
+
+        String connectedMessage = "Connected to remote at " + this.networkModel.getSocket().getRemoteSocketAddress();
+        System.out.println(connectedMessage);
         this.ui.setProgressBarVisible(false);
-        this.ui.setStatusLabelText("Connected to " + this.networkModel.getSocket().getRemoteSocketAddress());
+        this.ui.setStatusLabelText(connectedMessage);
 
         startReceiving();
     }

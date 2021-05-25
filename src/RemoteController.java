@@ -14,7 +14,7 @@ public class RemoteController {
 
         try {
             this.networkModel.listen(1337);
-            System.out.println("Connected to viewer");
+            System.out.println("Connected to viewer at " + this.networkModel.getSocket().getRemoteSocketAddress());
             startReceiving();
         } catch (IOException e) {
             e.printStackTrace();
