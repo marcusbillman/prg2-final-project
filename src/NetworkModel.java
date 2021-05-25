@@ -49,7 +49,7 @@ public class NetworkModel {
     }
 
     public void sendParcel(String feature, Object payload) throws IOException {
-        String type = isServer ? "request" : "response";
+        String type = isServer ? "response" : "request";
         Parcel parcel = new Parcel(type, feature, payload);
         out.writeObject(parcel);
         out.flush();

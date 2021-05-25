@@ -20,14 +20,10 @@ public class ViewerController {
         this.ui.addTerminalRunButtonListener(new TerminalRunButtonListener());
         this.ui.addTabSwitchListener(new TabSwitchListener());
 
-        try {
-            this.networkModel.listen(1337);
-            this.ui.setProgressBarVisible(false);
-            this.ui.setStatusLabelText("Connected to " +
-                    this.networkModel.getSocket().getRemoteSocketAddress());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String serverAddress = JOptionPane.showInputDialog("Remote address", "localhost");
+        this.networkModel.connect(serverAddress, 1337);
+        this.ui.setProgressBarVisible(false);
+        this.ui.setStatusLabelText("Connected to " + this.networkModel.getSocket().getRemoteSocketAddress());
 
         startReceiving();
     }

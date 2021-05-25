@@ -12,11 +12,13 @@ public class RemoteController {
     public RemoteController(NetworkModel networkModel) {
         this.networkModel = networkModel;
 
-        String serverAddress = JOptionPane.showInputDialog("Server address", "localhost");
-        this.networkModel.connect(serverAddress, 1337);
-        System.out.println("Connected to server");
-
-        startReceiving();
+        try {
+            this.networkModel.listen(1337);
+            System.out.println("Connected to viewer");
+            startReceiving();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void startReceiving() {
