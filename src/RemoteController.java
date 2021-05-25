@@ -80,7 +80,7 @@ public class RemoteController {
             screenCaptureThread = new RemoteScreenCapture(networkModel);
             screenCaptureThread.start();
         } else if (payload.equals("stop")) {
-            screenCaptureThread.interrupt();
+            if (screenCaptureThread != null) screenCaptureThread.interrupt();
         }
     }
 }
