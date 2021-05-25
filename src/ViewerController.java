@@ -4,6 +4,8 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -19,6 +21,7 @@ public class ViewerController {
         this.ui.addPopupSendButtonListener(new PopupSendButtonListener());
         this.ui.addTerminalRunButtonListener(new TerminalRunButtonListener());
         this.ui.addTabSwitchListener(new TabSwitchListener());
+        this.ui.addCloseListener(new CloseListener());
 
         String serverAddress = JOptionPane.showInputDialog("Remote address", "localhost");
         this.networkModel.connect(serverAddress, 1337);
@@ -137,5 +140,36 @@ public class ViewerController {
                 ioException.printStackTrace();
             }
         }
+    }
+
+    private class CloseListener implements WindowListener {
+        @Override
+        public void windowOpened(WindowEvent e) {}
+
+        @Override
+        public void windowClosing(WindowEvent e) {
+            System.out.println("Closing connection");
+            isRunning = false;
+            networkModel.closeConnection();
+            ui.getFrame().dispose();
+        }
+
+        @Override
+        public void windowClosed(WindowEvent e) {
+            System.out.println("Exiting");
+            System.exit(0);
+        }
+
+        @Override
+        public void windowIconified(WindowEvent e) {}
+
+        @Override
+        public void windowDeiconified(WindowEvent e) {}
+
+        @Override
+        public void windowActivated(WindowEvent e) {}
+
+        @Override
+        public void windowDeactivated(WindowEvent e) {}
     }
 }

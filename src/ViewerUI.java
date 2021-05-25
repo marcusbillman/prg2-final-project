@@ -2,6 +2,7 @@ import javax.swing.*;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowListener;
 
 public class ViewerUI {
     private final JFrame frame;
@@ -28,6 +29,7 @@ public class ViewerUI {
     public ViewerUI() {
         frame = new JFrame("CAT Viewer");
         frame.setContentPane(mainPanel);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
@@ -81,5 +83,9 @@ public class ViewerUI {
 
     public void addTabSwitchListener(ChangeListener changeListener) {
         tabbedPane.addChangeListener(changeListener);
+    }
+
+    public void addCloseListener(WindowListener windowListener) {
+        frame.addWindowListener(windowListener);
     }
 }
