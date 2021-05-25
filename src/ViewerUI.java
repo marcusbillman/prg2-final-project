@@ -32,6 +32,10 @@ public class ViewerUI {
         frame.setVisible(true);
     }
 
+    public JFrame getFrame() {
+        return frame;
+    }
+
     public String getPopupTitle() {
         return popupTitleTextField.getText();
     }
