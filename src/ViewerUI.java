@@ -26,7 +26,7 @@ public class ViewerUI {
     private JLabel screenLabel;
 
     public ViewerUI() {
-        frame = new JFrame("Server");
+        frame = new JFrame("CAT Viewer");
         frame.setContentPane(mainPanel);
         frame.pack();
         frame.setVisible(true);
