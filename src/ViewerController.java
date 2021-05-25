@@ -149,7 +149,6 @@ public class ViewerController {
         @Override
         public void windowClosing(WindowEvent e) {
             System.out.println("Closing connection");
-            isRunning = false;
             networkModel.closeConnection();
             ui.getFrame().dispose();
         }
