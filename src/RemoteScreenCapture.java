@@ -4,8 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class RemoteScreenCapture extends Thread {
-    private NetworkModel networkModel;
-    private double fps = 15;
+    private final NetworkModel networkModel;
 
     public RemoteScreenCapture(NetworkModel networkModel) {
         this.networkModel = networkModel;
@@ -13,6 +12,7 @@ public class RemoteScreenCapture extends Thread {
 
     @Override
     public void run() {
+        double fps = 15;
         double frameUpdateInterval = 1000000000 / fps;
         double delta = 0;
         long lastTime = System.nanoTime();

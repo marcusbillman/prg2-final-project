@@ -1,9 +1,9 @@
 import java.io.Serializable;
 
 public class Parcel implements Serializable {
-    private String type;
-    private String feature;
-    private Object payload;
+    private final String type;
+    private final String feature;
+    private final Object payload;
 
     public String getType() {
         return type;

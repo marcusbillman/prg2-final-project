@@ -5,8 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class RemoteController {
-    private NetworkModel networkModel;
-    private RemoteScreenCapture screenCapture;
+    private final NetworkModel networkModel;
     private Thread screenCaptureThread;
 
     public RemoteController(NetworkModel networkModel) {

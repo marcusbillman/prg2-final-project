@@ -5,11 +5,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class NetworkModel {
-    private String serverAddress;
-    private int port;
-    private boolean isServer;
+    private final boolean isServer;
 
-    private ServerSocket serverSocket;
     private Socket socket;
     private ObjectOutputStream out;
     private ObjectInputStream in;
@@ -24,19 +21,14 @@ public class NetworkModel {
 
     // Server: Start listening for client connection
     public void listen(int port) throws IOException {
-        this.port = port;
-
-        serverSocket = new ServerSocket(port);
+        ServerSocket serverSocket = new ServerSocket(port);
         socket = serverSocket.accept();
         out = new ObjectOutputStream(socket.getOutputStream());
         in = new ObjectInputStream(socket.getInputStream());
     }
 
     // Client: Connect to server
-    public Socket connect(String serverAddress, int port) {
-        this.serverAddress = serverAddress;
-        this.port = port;
-
+    public void connect(String serverAddress, int port) {
         try {
             socket = new Socket(serverAddress, port);
             out = new ObjectOutputStream(socket.getOutputStream());
@@ -44,8 +36,6 @@ public class NetworkModel {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        return socket;
     }
 
     public void sendParcel(String feature, Object payload) throws IOException {
