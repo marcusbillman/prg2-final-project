@@ -133,7 +133,7 @@ public class ViewerController {
             JTabbedPane tabbedPane = (JTabbedPane) e.getSource();
             int selectedIndex = tabbedPane.getSelectedIndex();
 
-            String payload = selectedIndex == 4 ? "start" : "stop";
+            String payload = selectedIndex == 2 ? "start" : "stop";
             try {
                 networkModel.sendParcel("screen", payload);
             } catch (IOException ioException) {

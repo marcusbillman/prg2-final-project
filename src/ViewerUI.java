@@ -14,9 +14,7 @@ public class ViewerUI {
 
     private JTabbedPane tabbedPane;
     private JPanel popupTab;
-    private JPanel applicationTab;
     private JPanel terminalTab;
-    private JPanel filesTab;
     private JPanel screenTab;
     private JTextArea popupBodyTextArea;
     private JButton popupSendButton;
