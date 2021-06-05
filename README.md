@@ -1,6 +1,6 @@
-# prg2-final-project
+# CAT
 
-Slutprojekt i Programmering 2. Ett fjärrstyrningsprogram vid namn CAT.
+Slutprojekt i Programmering 2. Ett fjärrstyrningsprogram bestående av en Viewer och en Remote.
 
 ☕ [Javadoc](https://marcusbillman.github.io/prg2-final-project/) (GitHub Pages)
 
@@ -10,4 +10,6 @@ Slutprojekt i Programmering 2. Ett fjärrstyrningsprogram vid namn CAT.
 
 🖼 [Kanban-bräde](https://github.com/marcusbillman/prg2-final-project/projects/1) (GitHub Projects)
 
-📊 [Klassdiagram](https://raw.githubusercontent.com/marcusbillman/prg2-final-project/main/class-diagram.drawio) (fil i repository)
+📊 [Klassdiagram](https://github.com/marcusbillman/prg2-final-project/blob/main/class-diagram.png?raw=true) (fil i repository)
+
+![Screenshot](https://github.com/marcusbillman/prg2-final-project/blob/main/screenshot.png?raw=true)
