@@ -3,6 +3,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+/**
+ * Handles capturing the remote computer screen and sending screenshots to the viewer.
+ */
 public class RemoteScreenCapture extends Thread {
     private final NetworkModel networkModel;
 
@@ -10,6 +13,9 @@ public class RemoteScreenCapture extends Thread {
         this.networkModel = networkModel;
     }
 
+    /**
+     * Starts the delta-timed screen capture loop.
+     */
     @Override
     public void run() {
         double fps = 15;
@@ -32,6 +38,10 @@ public class RemoteScreenCapture extends Thread {
         }
     }
 
+    /**
+     * Captures a screenshot as a BufferedImage.
+     * @return captured screenshot
+     */
     private BufferedImage captureScreen() {
         BufferedImage bufferedImage = null;
         try {
@@ -45,6 +55,10 @@ public class RemoteScreenCapture extends Thread {
         return bufferedImage;
     }
 
+    /**
+     * Sends a screenshot ImageIcon to the viewer.
+     * @param imageIcon screenshot to send
+     */
     private void sendScreen(ImageIcon imageIcon) {
         try {
             networkModel.sendParcel("screen", imageIcon);

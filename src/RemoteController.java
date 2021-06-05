@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+/**
+ * Controls the remote-side application including its network connectivity.
+ */
 public class RemoteController {
     private final NetworkModel networkModel;
     private Thread screenCaptureThread;
@@ -20,6 +23,10 @@ public class RemoteController {
         }
     }
 
+    /**
+     * Starts a loop that continuously receives incoming Parcels from the viewer. Parcels are passed on to the
+     * relevant handler based on feature name.
+     */
     private void startReceiving() {
         while (networkModel.getSocket().isConnected()) {
             Parcel parcel = this.networkModel.receiveParcel();
@@ -46,6 +53,11 @@ public class RemoteController {
         }
     }
 
+    /**
+     * Handler for Parcels of the popup feature. Displays a dialog box and responds to the viewer when the dialog box
+     * is closed by the user.
+     * @param payload string array with the popup's title and body
+     */
     private void handlePopupParcel(Object payload) {
         String[] payloadArray = (String[]) payload;
         JOptionPane.showMessageDialog(
@@ -57,6 +69,11 @@ public class RemoteController {
         }
     }
 
+    /**
+     * Handler for Parcels of the terminal feature. Launches a cmd process, executes the specified command and sends
+     * the output back to the viewer.
+     * @param payload command to execute
+     */
     private void handleTerminalParcel(Object payload) {
         String command = (String) payload;
         try {
@@ -76,6 +93,11 @@ public class RemoteController {
         }
     }
 
+    /**
+     * Handler for Parcels of the screen feature. Starts (or stops) a screen capture thread that continuously sends
+     * screenshots to the viewer.
+     * @param payload "start" or "stop"
+     */
     private void handleScreenParcel(Object payload) {
         if (payload.equals("start")) {
             screenCaptureThread = new RemoteScreenCapture(networkModel);

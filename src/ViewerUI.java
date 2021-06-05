@@ -4,6 +4,9 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
 
+/**
+ * Viewer-side GUI.
+ */
 public class ViewerUI {
     private final JFrame frame;
     private JPanel mainPanel;

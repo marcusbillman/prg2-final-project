@@ -9,6 +9,9 @@ import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+/**
+ * Controls the viewer-side application including its network connectivity and GUI.
+ */
 public class ViewerController {
     private final ViewerUI ui;
     private final NetworkModel networkModel;
@@ -34,6 +37,10 @@ public class ViewerController {
         startReceiving();
     }
 
+    /**
+     * Starts a loop that continuously receives incoming Parcels from the remote. Parcels are passed on to the
+     * relevant handler based on feature name.
+     */
     private void startReceiving() {
         while (networkModel.getSocket().isConnected()) {
             Parcel parcel = this.networkModel.receiveParcel();
@@ -60,6 +67,11 @@ public class ViewerController {
         }
     }
 
+    /**
+     * Handler for Parcels of the screen feature. Gets the screenshot, calculates its dimensions and aspect ratio, and
+     * displays the correctly scaled image in the GUI.
+     * @param payload "start" or "stop"
+     */
     private void handleScreenParcel(Object payload) {
         ImageIcon imageIcon = (ImageIcon) payload;
         Image image = imageIcon.getImage();
@@ -92,6 +104,13 @@ public class ViewerController {
         ui.setScreenIcon(scaledImageIcon);
     }
 
+    /**
+     * Scales an image to the specified dimensions.
+     * @param image source image to scale
+     * @param width target image width
+     * @param height target image height
+     * @return scaled image
+     */
     private Image getScaledImage(Image image, int width, int height){
         BufferedImage scaledImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D graphics = scaledImage.createGraphics();
@@ -105,6 +124,9 @@ public class ViewerController {
 
     // -------------------- Listeners
 
+    /**
+     * Custom listener based on ActionListener that, when invoked, sends a popup request Parcel to the remote.
+     */
     private class PopupSendButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String body = ui.getPopupBody();
@@ -117,6 +139,9 @@ public class ViewerController {
         }
     }
 
+    /**
+     * Custom listener based on ActionListener that, when invoked, sends a terminal request Parcel to the remote.
+     */
     private class TerminalRunButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String command = ui.getTerminalCommand();
@@ -128,6 +153,9 @@ public class ViewerController {
         }
     }
 
+    /**
+     * Custom listener based on ChangeListener that, when invoked, sends a screen request Parcel to the remote.
+     */
     private class TabSwitchListener implements ChangeListener {
         public void stateChanged(ChangeEvent e) {
             JTabbedPane tabbedPane = (JTabbedPane) e.getSource();
@@ -142,6 +170,10 @@ public class ViewerController {
         }
     }
 
+    /**
+     * Custom listener based on CloseListener that, when invoked, safely closes the network connection before exiting
+     * the application.
+     */
     private class CloseListener implements WindowListener {
         @Override
         public void windowOpened(WindowEvent e) {}

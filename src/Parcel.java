@@ -1,5 +1,8 @@
 import java.io.Serializable;
 
+/**
+ * A simple data structure representing a request or response sent between the server and client.
+ */
 public class Parcel implements Serializable {
     private final String type;
     private final String feature;
