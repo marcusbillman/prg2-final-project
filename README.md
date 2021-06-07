@@ -2,14 +2,16 @@
 
 Slutprojekt i Programmering 2. Ett fjärrstyrningsprogram bestående av en Viewer och en Remote.
 
-☕ [Javadoc](https://marcusbillman.github.io/prg2-final-project/) (GitHub Pages)
+🌐 [Webbplats med nedladdning](https://marcusbillman.github.io/prg2-final-project/)
 
-📑 [Post mortem](https://github.com/marcusbillman/prg2-final-project/wiki/Post-mortem) (GitHub Wiki)
+☕ [Javadoc](https://marcusbillman.github.io/prg2-final-project/javadoc)
 
-📑 [Planering/projektbeskrivning](https://github.com/marcusbillman/prg2-final-project/wiki/Planering) (GitHub Wiki)
+📑 [Post mortem](https://github.com/marcusbillman/prg2-final-project/wiki/Post-mortem)
 
-🖼 [Kanban-bräde](https://github.com/marcusbillman/prg2-final-project/projects/1) (GitHub Projects)
+📑 [Planering/projektbeskrivning](https://github.com/marcusbillman/prg2-final-project/wiki/Planering)
 
-📊 [Klassdiagram](https://github.com/marcusbillman/prg2-final-project/blob/main/class-diagram.png?raw=true) (fil i repository)
+🖼 [Kanban-bräde](https://github.com/marcusbillman/prg2-final-project/projects/1)
+
+📊 [Klassdiagram](https://github.com/marcusbillman/prg2-final-project/blob/main/class-diagram.png?raw=true)
 
 ![Screenshot](https://github.com/marcusbillman/prg2-final-project/blob/main/screenshot.png?raw=true)
